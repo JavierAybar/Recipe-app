@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Foods</h1>
-
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New food", new_food_path %>
+<section class='foods'>
+  <h1>List of Foods</h1>
+  <%= link_to "Add Food", new_user_food_path %>
+  <table>
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Measurement Unit</th>
+        <th>Unit Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @foods.each do |food| %>
+        <tr>
+          <td><%= food.name %></td>
+          <td><%= food.measurement_unit %></td>
+          <td><%= food.price %></td>
+          <td><%= button_to "Delete", user_food_path(food.user, food), :class => 'btn' , method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
