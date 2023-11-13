@@ -1,5 +1,4 @@
 class RecipesController < ApplicationController
-
   # GET /recipes or /recipes.json
   def index
     @user = User.find(params[:user_id])
@@ -45,7 +44,6 @@ class RecipesController < ApplicationController
   end
 
   private
-
 
   # Only allow a list of trusted parameters through.
   def recipe_params
