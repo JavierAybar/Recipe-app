@@ -2,4 +2,16 @@
   <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
   <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
   <h1>Recipes</h1>
+
+  <div>
+  <% @recipes.each do |recipe| %>
+  <a href="<%= user_recipe_path(@user, recipe) %>">
+      <h4><%= recipe.name %></h4>
+      <p><%= recipe.description %></p>
+
+     <%= button_to "Delete", user_recipe_path(@user, recipe), method: :delete%>
+
+  <% end %>
+  </a>
+  </div>
 </section>
