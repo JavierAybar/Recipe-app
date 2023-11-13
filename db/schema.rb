@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_13_170127) do
 
   create_table "foods", force: :cascade do |t|
     t.string "name"
-    t.integer "measurement_unit", default: 0
+    t.string "measurement_unit"
     t.decimal "price", default: "0.0"
     t.integer "quantity", default: 0
     t.datetime "created_at", null: false
