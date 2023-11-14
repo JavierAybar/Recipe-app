@@ -25,7 +25,7 @@
 
 <div>
   <button>Generate shopping list</button>
-  <button>Add ingredient</button>
+  <button><%= link_to "Add Ingredient", new_user_recipe_recipe_food_path(@recipe.user, @recipe) %></button>
   <hr>
 </div>
 
@@ -35,18 +35,18 @@
     <thead>
       <tr>
         <th>Food Name</th>
-        <th>Measurement Unit</th>
+        <th>Quantiy</th>
         <th>Price</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <% @foods.each do |food| %>
+      <% @recipe.recipe_foods.each do |ingredient| %>
         <tr>
-          <td><%= food.name %></td>
-          <td><%= food.measurement_unit %></td>
-          <td><%= food.price %></td>
-          <td><%= button_to "Delete", user_food_path(food.user, food), :class => 'btn' , method: :delete %></td>
+          <td><%= ingredient.food.name %></td>
+          <td><%= ingredient.quantity %> <%= ingredient.food.measurement_unit %></td>
+          <td><%= ingredient.food.price %></td>
+          <td><%= button_to "Delete", user_recipe_recipe_food_path(@recipe.user, @recipe, ingredient), :class => 'btn' , method: :delete %></td>
         </tr>
       <% end %>
     </tbody>
