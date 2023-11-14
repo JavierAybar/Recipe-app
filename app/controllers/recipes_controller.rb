@@ -24,27 +24,27 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
 
-    respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @recipe }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
+    if @recipe.save
+      flash[:success] = 'Recipe Added!'
+      redirect_to user_recipes_path(@recipe.user)
+    else
+      render :new
     end
   end
 
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
-    @user = User.find(params[:user_id])
     @recipe = Recipe.find(params[:id])
-    @recipe.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
-      format.json { head :no_content }
+    @user = @recipe.user
+    @recipe.recipe_foods.destroy_all
+    
+    if @recipe.destroy
+      flash[:success] = 'Recipe Deleted!'
+      redirect_to user_recipes_path(@user)
+    else
+      flash[:error] = 'Something went wrong!'
     end
   end
 
@@ -60,6 +60,6 @@ class RecipesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def recipe_params
-    params.fetch(:recipe, {})
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
   end
 end
