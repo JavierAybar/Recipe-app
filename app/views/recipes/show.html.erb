@@ -1,1 +1,56 @@
 <h1>Recipes Details</h1>
+
+<%= form_for @recipe, url: toggle_public_user_recipe_path(@user, @recipe), method: :patch, html: { id: 'toggle-public-form' } do |f| %>
+  <%= f.submit "Toggle Public", id: 'toggle-public-btn' %>
+<% end %>
+
+
+<table>
+  <tr>
+    <th><%= @recipe.name %></th>
+  </tr>
+  <tr>
+    <th>Preparation time</th>
+    <td><%= @recipe.preparation_time %></td>
+  </tr>
+  <tr>
+    <th>Cooking time</th>
+    <td><%= @recipe.cooking_time %></td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= @recipe.description %></td>
+  </tr>
+</table>
+
+<div>
+  <button>Generate shopping list</button>
+  <button>Add ingredient</button>
+  <hr>
+</div>
+
+<% if @recipe.public == false || current_user == @user %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Food Name</th>
+        <th>Measurement Unit</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @foods.each do |food| %>
+        <tr>
+          <td><%= food.name %></td>
+          <td><%= food.measurement_unit %></td>
+          <td><%= food.price %></td>
+          <td><%= button_to "Delete", user_food_path(food.user, food), :class => 'btn' , method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
