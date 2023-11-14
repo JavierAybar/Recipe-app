@@ -9,6 +9,7 @@ class RecipesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @recipe = @user.recipes.find(params[:id])
+    @foods = @user.foods
   end
 
   # GET /recipes/new
@@ -34,13 +35,21 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
     @user = User.find(params[:user_id])
-    @recipe = Recipes.find(params[:id])
+    @recipe = Recipe.find(params[:id])
     @recipe.destroy!
 
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_public
+    @user = User.find(params[:user_id])
+    @recipe = @user.recipes.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+
+    redirect_to user_recipe_path(@user, @recipe)
   end
 
   private
