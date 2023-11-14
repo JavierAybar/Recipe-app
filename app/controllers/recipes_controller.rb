@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @user = @recipe.user
     @recipe.recipe_foods.destroy_all
-    
+
     if @recipe.destroy
       flash[:success] = 'Recipe Deleted!'
       redirect_to user_recipes_path(@user)

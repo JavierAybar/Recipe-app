@@ -11,7 +11,7 @@ class RecipeFoodsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = RecipeFood.new(recipe_food_params)
     @recipe_food.recipe = @recipe
-    
+
     if @recipe_food.save
       flash[:success] = 'Ingredient Added!'
       redirect_to user_recipe_path(@recipe.user, @recipe)
@@ -25,7 +25,7 @@ class RecipeFoodsController < ApplicationController
   def destroy
     @recipe_food = RecipeFood.find(params[:id])
     @recipe = @recipe_food.recipe
-    
+
     if @recipe_food.destroy
       flash[:success] = 'Ingredient Deleted!'
       redirect_to user_recipe_path(@recipe.user, @recipe)
