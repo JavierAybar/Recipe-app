@@ -1,9 +1,21 @@
-<h1>New recipe</h1>
+<seciton class='addRecipe'>
+  <%= form_with model: @recipe, url: user_recipes_path, method: :post do |form| %>
+    <%= form.label :name, 'Name:' %>
+    <%= form.text_field :name %>
+    <br>
+    <%= form.label :preparation_time, 'Preparation time:' %>
+    <%= form.text_field :preparation_time %>
+    <br>
+    <%= form.label :cooking_time, 'Cooking time:' %>
+    <%= form.text_field :cooking_time %>
+    <br>
+    <%= form.label :description, 'Description:' %>
+    <%= form.text_area :description %>
+    <br>
+    <%= form.label :public, 'Public:' %>
+    <%= form.check_box :public %>
+    <br>
+    <%= form.submit "Create Recipe", :class => 'btn' %>
+  <% end %>
+</section>
 
-<%= render "form", recipe: @recipe %>
-
-<br>
-
-<div>
-  <%= link_to "Back to recipes", recipes_path %>
-</div>
