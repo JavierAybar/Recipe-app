@@ -1,4 +1,8 @@
 class RecipesController < ApplicationController
+  def public
+    @public_recipes = Recipe.where(public: true).order(created_at: :desc)
+  end
+
   # GET /recipes or /recipes.json
   def index
     @user = User.find(params[:user_id])

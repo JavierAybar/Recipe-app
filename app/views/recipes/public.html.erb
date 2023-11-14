@@ -1,0 +1,23 @@
+<section class='publicRecipes'>
+  <h1>Public Recipes</h1>
+  <% if user_signed_in? %>
+    <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
+  <% else %>
+    <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
+  <% end %>
+
+  <% @public_recipes.each do |public_recipe| %>
+    <div class='publicRecipe'>
+      <h2><%= public_recipe.name %></h2>
+      <p>By <%= public_recipe.user.name %></p>
+      <div class='totals'>
+        <p>Total food items: </p>
+        <p>Total price: $ </p>
+        <% if public_recipe.user == current_user %>
+          <button_to "Delete Recipe", destroy_user_recipe_path(public_recipe.user, public_recipe), :class => 'btn', method: :delete %>
+        <% end %>
+      </div>
+
+    </div>
+  <% end %>  
+</section>
