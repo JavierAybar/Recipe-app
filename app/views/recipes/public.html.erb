@@ -1,0 +1,30 @@
+<section class='publicRecipes'>
+  <h1>Public Recipes</h1>
+  <% if user_signed_in? %>
+    <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
+  <% else %>
+    <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
+  <% end %>
+
+  <% @public_recipes.each do |public_recipe| %>
+    <div class='publicRecipe'>
+      <h2><%= link_to public_recipe.name, user_recipe_path(public_recipe.user, public_recipe) %></h2>
+      <p>By <%= public_recipe.user.name %></p>
+      <div class='totals'>
+        <p>Total food items: <%= public_recipe.recipe_foods.count %></p>
+        <p>
+          Total price: $ 
+          <% sum = 0 %>
+          <% public_recipe.recipe_foods.each do |ingredient| %>
+          <% food = Food.find(ingredient.food_id) %>
+          <% sum += food.price * ingredient.quantity %>
+          <% end %>
+          <%= sum %>
+        </p>
+        <% if public_recipe.user == current_user %>
+          <%= button_to "Delete Recipe", user_recipe_path(public_recipe.user, public_recipe), :class => 'btn', method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>  
+</section>

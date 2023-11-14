@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'recipes#index'
+  root to: 'recipes#public'
 
   resources :users, only: [:index, :show] do 
-    resources :recipes, only: [:index, :destroy, :show, :toggle_public] do
+    resources :recipes, only: [:public, :index, :new, :create, :destroy, :show, :toggle_public] do
+      resources :recipe_foods, only: [:new, :create, :destroy]
       member do
         patch 'toggle_public'
       end

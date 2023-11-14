@@ -1,9 +1,8 @@
 <section class='recipes'>
-  <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
-  <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
-  <h1>Recipes</h1>
+  <h1>My Recipes</h1>
 
   <div>
+  <button><%= link_to "Add Recipe", new_user_recipe_path %></button>
   <% @recipes.each do |recipe| %>
   <a href="<%= user_recipe_path(@user, recipe) %>">
       <h4><%= recipe.name %></h4>
