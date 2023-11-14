@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @recipe = @user.recipes.find(params[:id])
-    @foods = @user.foods
+    @foods = @recipe.recipe_foods
   end
 
   # GET /recipes/new
