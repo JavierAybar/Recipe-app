@@ -19,13 +19,12 @@
           <% food = Food.find(ingredient.food_id) %>
           <% sum += food.price * ingredient.quantity %>
           <% end %>
-          <%= sum %>  
+          <%= sum %>
         </p>
         <% if public_recipe.user == current_user %>
           <%= button_to "Delete Recipe", user_recipe_path(public_recipe.user, public_recipe), :class => 'btn', method: :delete %>
         <% end %>
       </div>
-
     </div>
   <% end %>  
 </section>
