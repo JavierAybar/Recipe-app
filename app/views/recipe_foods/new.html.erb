@@ -1,9 +1,12 @@
-<h1>New recipe food</h1>
-
-<%= render "form", recipe_food: @recipe_food %>
-
-<br>
-
-<div>
-  <%= link_to "Back to recipe foods", recipe_foods_path %>
-</div>
+<section class='addIngredient'>
+<%= form_with model: @recipe_food, url: user_recipe_recipe_foods_path, method: :post do |form| %>
+  <%= form.label :food_id, 'Food:' %>
+  <%= form.collection_select :food_id, Food.all, :id, :name %>
+  <button><%= link_to "Add new food option", new_user_food_path %></button>
+  <br>
+  <%= form.label :quantity, 'Quantity:' %>
+  <%= form.text_field :quantity %>
+  <br>
+  <%= form.submit "Add Ingredient", :class => 'btn' %>
+<% end %>
+</section>
