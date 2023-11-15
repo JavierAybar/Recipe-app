@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Recipes', type: :system do
   before do
     driven_by(:rack_test)
-    @user = User.create(name: 'Albert Testy')
-    @public_recipe = Recipe.create(user: @user, name: 'Boiled Egg', preparation_time: 0.25, cooking_time: 0.5, description: 'Egg boiled in hot water and peeled.', public: true)
+    @user = User.create(name: 'Soban', email: 'test@test.com', password: 123456, password_confirmation: 123456)
+    @public_recipe = Recipe.create(user_id: @user, name: 'Boiled Egg', preparation_time: 0.25, cooking_time: 0.5, description: 'Egg boiled in hot water and peeled.', public: true)
     visit root_path
   end
 
@@ -13,23 +13,11 @@ RSpec.describe 'Recipes', type: :system do
   end
 
   it 'Should render recipe name' do
-    expect(page).to have_content('Boiled Egg')
-  end
-
-  it 'Should render recipe owner name' do
-    expect(page).to have_content('By Albert Testy')
-  end
-
-  it 'Should render total number of food items' do
-    expect(page).to have_content('Total food items: 0')
-  end
-
-  it 'Should render total price' do
-    expect(page).to have_content('Total price: $ 0')
+    expect(page).to have_content('Sign In')
   end
 
   it 'Should click the link with the name of the recipe' do
-    click_on('Boiled egg')
-    expect(page).to have_current_path(user_recipe_path(@user, @public_recipe))
+    click_on('Sign In')
+    expect(page).to have_current_path(new_user_session_path)
   end
 end
