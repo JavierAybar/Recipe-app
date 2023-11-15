@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative './spec_support_helpers'
 
-RSpec.describe Recipe, type: :system do
+RSpec.describe Food, type: :system do
   before(:all) do
     user = authentificate_test_user
     @recipe = Recipe.first
@@ -13,28 +13,34 @@ RSpec.describe Recipe, type: :system do
     @ingredient ||= RecipeFood.create(recipe: @recipe, food: @food, quantity: 1)
   end
 
-  it 'can see the public recipe' do
+  it 'can see the foods header' do
     user = authentificate_test_user
-    visit root_path
-    expect(page).to have_content('Public Recipes')
+    visit user_foods_path(user)
+    expect(page).to have_content('List of Foods')
   end
 
-  it 'can see the recipe name' do
+  it 'can see the food name' do
     user = authentificate_test_user
-    visit root_path
-    expect(page).to have_content(@recipe.name)
+    visit user_foods_path(user)
+    expect(page).to have_content(@food.name)
   end
 
-  it 'can see recipe owner' do
+  it 'can see the food measurement units' do
     user = authentificate_test_user
-    visit root_path
-    expect(page).to have_content(user.name)
+    visit user_foods_path(user)
+    expect(page).to have_content(@food.measurement_unit)
+  end
+
+  it 'can see the food price' do
+    user = authentificate_test_user
+    visit user_foods_path(user)
+    expect(page).to have_content(@food.price)
   end
   
-  it 'redirect to recipe details page' do
+  it 'redirect to add ingredient page' do
     user = authentificate_test_user
-    visit root_path
-    click_on @recipe.name
-    expect(has_current_path?(user_recipe_path(user, @recipe), wait: 2)).to be_truthy
+    visit user_foods_path(user)
+    click_on 'Add Food'
+    expect(has_current_path?(new_user_food_path(user), wait: 2)).to be_truthy
   end
 end

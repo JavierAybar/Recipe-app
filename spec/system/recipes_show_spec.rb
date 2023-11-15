@@ -13,6 +13,12 @@ RSpec.describe Recipe, type: :system do
     @ingredient ||= RecipeFood.create(recipe: @recipe, food: @food, quantity: 1)
   end
 
+  it 'can see the recipe header' do
+    user = authentificate_test_user
+    visit user_recipe_path(user, @recipe)
+    expect(page).to have_content('Recipes Details')
+  end
+
   it 'can see the recipe name' do
     user = authentificate_test_user
     visit user_recipe_path(user, @recipe)
@@ -41,5 +47,12 @@ RSpec.describe Recipe, type: :system do
     user = authentificate_test_user
     visit user_recipe_path(user, @recipe)
     expect(page).to have_content(@food.name)
+  end
+  
+  it 'redirect to add ingredient page' do
+    user = authentificate_test_user
+    visit user_recipe_path(user, @recipe)
+    click_on 'Add Ingredient'
+    expect(has_current_path?(new_user_recipe_recipe_food_path(user, @recipe), wait: 2)).to be_truthy
   end
 end

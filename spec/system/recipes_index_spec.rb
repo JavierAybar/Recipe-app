@@ -13,10 +13,16 @@ RSpec.describe Recipe, type: :system do
     @ingredient ||= RecipeFood.create(recipe: @recipe, food: @food, quantity: 1)
   end
 
-  it 'can see the recipe name' do
+  it 'can see the recipes header' do
     user = authentificate_test_user
     visit user_recipes_path(user)
     expect(page).to have_content(@recipe.name)
+  end
+
+  it 'can see the recipe name' do
+    user = authentificate_test_user
+    visit user_recipes_path(user)
+    expect(page).to have_content('My Recipes')
   end
 
   it 'can see recipe description' do
