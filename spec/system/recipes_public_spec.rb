@@ -1,23 +1,52 @@
 require 'rails_helper'
+require_relative './spec_support_helpers'
 
-RSpec.describe 'Recipes', type: :system do
-  before do
-    driven_by(:rack_test)
-    @user = User.create(name: 'Soban', email: 'test@test.com', password: 123456, password_confirmation: 123456)
-    @public_recipe = Recipe.create(user_id: @user, name: 'Boiled Egg', preparation_time: 0.25, cooking_time: 0.5, description: 'Egg boiled in hot water and peeled.', public: true)
-    visit root_path
+RSpec.describe Recipe, type: :system do
+  before(:all) do
+    user = authentificate_test_user
+    @recipe = Recipe.first
+    @recipe ||= Recipe.create(name: 'Pizza Recipe', description: 'Salt',
+                              preparation_time: 10, cooking_time: 3, public: true, user:)
+
+    @food = Food.first
+    @food ||= Food.create(name: 'Salt', measurement_unit: 'gram', price: 1, quantity: 3, user:)
+
+    @ingredient = RecipeFood.first
+    @ingredient ||= RecipeFood.create(recipe: @recipe, food: @food, quantity: 1)
   end
 
-  it 'Should render public header' do
-    expect(page).to have_content('Public Recipes')
+  it 'can see the recipe details' do
+    authentificate_test_user
+    expect(page).to have_content('Logout')
+    visit "/recipes/#{@recipe.id}"
+    expect(page).to have_content(@recipe.name)
+    expect(page).to have_content(@recipe.description)
+    expect(page).to have_content(@recipe.cooking_time)
+    expect(page).to have_content(@recipe.preparation_time)
   end
 
-  it 'Should render recipe name' do
-    expect(page).to have_content('Sign In')
+  it 'can see ingredient elements' do
+    authentificate_test_user
+    expect(page).to have_content('Logout')
+    visit "/recipes/#{@recipe.id}"
+    expect(page).to have_content(@ingredient.quantity)
   end
 
-  it 'Should click the link with the name of the recipe' do
-    click_on('Sign In')
-    expect(page).to have_current_path(new_user_session_path)
+  it 'Btn add ingredient should navigate to new' do
+    authentificate_test_user
+    expect(page).to have_content('Logout')
+    visit "/recipes/#{@recipe.id}"
+    click_button 'Add Ingredient'
+
+    expect(has_current_path?("/recipes/#{@recipe.id}/recipe_foods/new", wait: 5)).to be_truthy
+  end
+
+  it 'Btn generate shopping list should navigate to shopping_list' do
+    authentificate_test_user
+    expect(page).to have_content('Logout')
+    visit "/recipes/#{@recipe.id}"
+    click_button 'Generate Shopping List'
+
+    expect(has_current_path?('/general_shopping_list', wait: 5)).to be_truthy
   end
 end
