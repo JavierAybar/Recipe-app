@@ -1,7 +1,7 @@
 <section class='recipeDetails'>
   <h1>Recipes Details</h1>
   <% if @recipe.user == current_user %>
-    <%= button_to "Delete Recipe", user_recipe_path(public_recipe.user, public_recipe), :class => 'btn', method: :delete %>
+    <%= button_to "Delete Recipe", user_recipe_path(@user, @recipe), :class => 'btn', method: :delete %>
   <% end %>
 
   <%= form_for @recipe, url: toggle_public_user_recipe_path(@user, @recipe), method: :patch, html: { id: 'toggle-public-form' } do |f| %>
