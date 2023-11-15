@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative './spec_support_helpers'
+require_relative 'spec_support_helpers'
 
 RSpec.describe Recipe, type: :system do
   before(:all) do
@@ -42,17 +42,17 @@ RSpec.describe Recipe, type: :system do
     visit user_recipe_path(user, @recipe)
     expect(page).to have_content(@recipe.description)
   end
-  
+
   it 'can see recipe ingredient' do
     user = authentificate_test_user
     visit user_recipe_path(user, @recipe)
     expect(page).to have_content(@food.name)
   end
-  
+
   it 'redirect to add ingredient page' do
     user = authentificate_test_user
     visit user_recipe_path(user, @recipe)
-    click_on 'Add Ingredient'
+    click_link 'Add Ingredient'
     expect(has_current_path?(new_user_recipe_recipe_food_path(user, @recipe), wait: 2)).to be_truthy
   end
 end

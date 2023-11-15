@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative './spec_support_helpers'
+require_relative 'spec_support_helpers'
 
 RSpec.describe Food, type: :system do
   before(:all) do
@@ -36,7 +36,7 @@ RSpec.describe Food, type: :system do
     visit user_foods_path(user)
     expect(page).to have_content(@food.price)
   end
-  
+
   it 'redirect to add ingredient page' do
     user = authentificate_test_user
     visit user_foods_path(user)
