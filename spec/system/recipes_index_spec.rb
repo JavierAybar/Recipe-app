@@ -15,19 +15,19 @@ RSpec.describe Recipe, type: :system do
 
   it 'can see the recipe name' do
     user = authentificate_test_user
-    visit root_path
+    visit user_recipes_path(user)
     expect(page).to have_content(@recipe.name)
   end
-  
-  it 'can see recipe owner' do
+
+  it 'can see recipe description' do
     user = authentificate_test_user
-    visit root_path
-    expect(page).to have_content(user.name)
+    visit user_recipes_path(user)
+    expect(page).to have_content(@recipe.description)
   end
   
   it 'redirect to recipe details page' do
     user = authentificate_test_user
-    visit root_path
+    visit user_recipes_path(user)
     click_on @recipe.name
     expect(has_current_path?(user_recipe_path(user, @recipe), wait: 2)).to be_truthy
   end
