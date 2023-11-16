@@ -1,10 +1,6 @@
 <section class='publicRecipes'>
+  <%= render partial: 'recipes/navigation' %>
   <h1>Public Recipes</h1>
-  <% if user_signed_in? %>
-    <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
-  <% else %>
-    <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
-  <% end %>
 
   <% @public_recipes.each do |public_recipe| %>
     <div class='publicRecipe'>

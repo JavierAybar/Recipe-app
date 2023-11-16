@@ -1,0 +1,10 @@
+<nav>
+  <%= link_to "Home", root_path %>
+  <% if user_signed_in? %>
+    <%= link_to "Recipes", user_recipes_path(current_user) %>
+    <%= link_to "Foods", user_foods_path(current_user) %>
+    <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
+  <% else %>
+    <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
+  <% end %>
+</nav>
