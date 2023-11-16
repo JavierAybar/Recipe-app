@@ -1,23 +1,27 @@
 <seciton class='addRecipe'>
-  <%= render partial: 'recipes/navigation' %>
-  <h1>Add a new Recipe</h1>
+  <h1 class=' mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400'>Add a new Recipe</h1>
   <%= form_with model: @recipe, url: user_recipes_path, method: :post do |form| %>
-    <%= form.label :name, 'Name:' %>
-    <%= form.text_field :name %>
-    <br>
-    <%= form.label :preparation_time, 'Preparation time:' %>
-    <%= form.text_field :preparation_time %>
-    <br>
-    <%= form.label :cooking_time, 'Cooking time:' %>
-    <%= form.text_field :cooking_time %>
-    <br>
-    <%= form.label :description, 'Description:' %>
-    <%= form.text_area :description %>
-    <br>
-    <%= form.label :public, 'Public:' %>
-    <%= form.check_box :public %>
-    <br>
-    <%= form.submit "Create Recipe", :class => 'btn' %>
+    <div class="mb-6">
+      <%= form.label :name, 'Name:', :class=>'block mb-2 text-sm font-medium text-gray-900 dark:text-black' %>
+      <%= form.text_field :name, :class=>'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :preparation_time, 'Preparation time:', :class=>'block mb-2 text-sm font-medium text-gray-900 dark:text-black' %>
+      <%= form.text_field :preparation_time, :class=>'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :cooking_time, 'Cooking time:', :class=>'block mb-2 text-sm font-medium text-gray-900 dark:text-black' %>
+      <%= form.text_field :cooking_time, :class=>'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :description, 'Description:', :class=>'block mb-2 text-sm font-medium text-gray-900 dark:text-black' %>
+      <%= form.text_area :description, :class=>'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :public, 'Public:', :class=>'block mb-2 text-sm font-medium text-gray-900 dark:text-black' %>
+      <%= form.check_box :public, :class=>'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800' %>
+    </div>
+    <%= form.submit "Create Recipe", :class => 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
   <% end %>
 </section>
 

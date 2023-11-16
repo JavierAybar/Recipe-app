@@ -40,7 +40,7 @@ RSpec.describe Food, type: :system do
   it 'redirect to add ingredient page' do
     user = authentificate_test_user
     visit user_foods_path(user)
-    click_on 'Add Food'
+    click_link 'Add Food'
     expect(has_current_path?(new_user_food_path(user), wait: 2)).to be_truthy
   end
 end
