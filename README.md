@@ -104,6 +104,12 @@ To run tests, run the following command:
   rspec spec
 ```
 
+### Compile Tailwind CSS:
+
+```sh
+  rails tailwindcss:build
+```
+
 ### Deployment
 
 You can deploy this project using GitPages:
