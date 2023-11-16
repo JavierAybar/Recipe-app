@@ -4,12 +4,12 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 <h2 class="text-xl font-medium text-gray-900 dark:text-white">Log in</h2>
   <div class="field">
-    <%= f.label :email, :class => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white' %><br />
+    <%= f.label :email, :class => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white' %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
   </div>
 
   <div class="field">
-    <%= f.label :password, :class => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white' %><br />
+    <%= f.label :password, :class => 'block mb-2 text-sm font-medium text-gray-900 dark:text-white' %>
     <%= f.password_field :password, autocomplete: "current-password", :class => "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
   </div>
 

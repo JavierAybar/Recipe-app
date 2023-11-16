@@ -101,7 +101,8 @@ a {
 .addFood,
 .addRecipe,
 .addIngredient,
-.log-in-form {
+.log-in-form,
+.sign-up-form {
   display: flex;
   flex-direction: column;
   align-items: center;
