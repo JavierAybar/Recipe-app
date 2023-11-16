@@ -1,17 +1,17 @@
-<section class='recipes'>
-  <%= render partial: 'recipes/navigation' %>
-  <h1>My Recipes</h1>
-
-  <div>
-  <button><%= link_to "Add Recipe", new_user_recipe_path %></button>
-  <% @recipes.each do |recipe| %>
-  <a href="<%= user_recipe_path(@user, recipe) %>">
-      <h4><%= recipe.name %></h4>
-      <p><%= recipe.description %></p>
-
-     <%= button_to "Delete", user_recipe_path(@user, recipe), method: :delete%>
-
-  <% end %>
-  </a>
+<section class='recipes-list'>
+  <h2 class = 'recipe-title'>My Recipes</h2>
+  <div class = 'recipe-container-list'>
+    <button class = 'recipe-btn-add-recipe'><%= link_to "New recipe", new_user_recipe_path %></button>
+    <% @recipes.each do |recipe| %>
+      <a href="<%= user_recipe_path(@user, recipe) %>">
+        <div class = 'recipe-card'>
+          <div class = 'recipe-container-name-delete'>
+            <h4 class = 'recipe-name'><%= recipe.name %></h4>
+            <%= button_to "Remove", user_recipe_path(@user, recipe), method: :delete, class: 'remove-btn'%>
+          </div>  
+          <p class = 'recipe-description'><%= recipe.description %></p>
+        </div>  
+      </a>
+    <% end %>
   </div>
 </section>

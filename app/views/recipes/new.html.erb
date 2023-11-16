@@ -1,5 +1,4 @@
 <seciton class='addRecipe'>
-  <%= render partial: 'recipes/navigation' %>
   <h1>Add a new Recipe</h1>
   <%= form_with model: @recipe, url: user_recipes_path, method: :post do |form| %>
     <%= form.label :name, 'Name:' %>

@@ -1,5 +1,4 @@
 <section class='addIngredient'>
-  <%= render partial: 'recipe_foods/navigation' %>
   <h1>Add a new Ingredient</h1>
   <%= form_with model: @recipe_food, url: user_recipe_recipe_foods_path, method: :post do |form| %>
     <%= form.label :food_id, 'Food:' %>

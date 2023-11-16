@@ -1,5 +1,4 @@
 <seciton class='addFood'>
-  <%= render partial: 'foods/navigation' %>
   <h1>Add a new Food</h1>
   <%= form_with model: @food, url: user_foods_path, method: :post do |form| %>
     <%= form.label :name, 'Name:' %>

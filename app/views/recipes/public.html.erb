@@ -1,7 +1,5 @@
 <section class='publicRecipes'>
-  <%= render partial: 'recipes/navigation' %>
   <h1>Public Recipes</h1>
-
   <% @public_recipes.each do |public_recipe| %>
     <div class='publicRecipe'>
       <h2><%= link_to public_recipe.name, user_recipe_path(public_recipe.user, public_recipe) %></h2>

@@ -1,5 +1,4 @@
 <section class='recipeDetails'>
-  <%= render partial: 'recipes/navigation' %>
   <h1>Recipes Details</h1>
   <%= form_for @recipe, url: toggle_public_user_recipe_path(@user, @recipe), method: :patch, html: { id: 'toggle-public-form' } do |f| %>
   <%= f.submit "Toggle Public", id: 'toggle-public-btn' %>
