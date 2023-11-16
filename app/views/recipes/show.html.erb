@@ -1,0 +1,103 @@
+<section class='recipeDetails'>
+  <h1 class=' mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400' >Recipes Details</h1>
+  
+  <div class = 'flex'>  
+ 
+<div class="relative overflow-x-auto shadow-lg shadow-blue-300 m-6 sm:rounded-lg">
+<h2  class= 'mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-black'><%= @recipe.name %></h2>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">   
+          
+             <tr>
+                <th scope="col" class="px-6 py-3">
+                  Preparation time
+                </th>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   <%= @recipe.preparation_time %>
+                </th>
+              </tr>
+
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                    Cooking time
+                </th>
+                <td class="px-6 py-4">
+                  <%= @recipe.cooking_time %>
+                </td>
+              </tr>
+
+               <tr>
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+                <td class="px-6 py-4">
+                    <%= @recipe.description %>
+                </td>
+              </tr>
+    </table>
+</div>
+
+
+    <div class='mt-6' >
+    <% if @recipe.public == true %>
+      <%= form_for @recipe, url: toggle_public_user_recipe_path(@user, @recipe), method: :patch, html: { id: 'toggle-public-form' } do |f| %>
+        <%= f.submit "Public", id: 'toggle-public-btn', class: "text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800" %>
+      <% end %>
+    <% else %>
+     <%= form_for @recipe, url: toggle_public_user_recipe_path(@user, @recipe), method: :patch, html: { id: 'toggle-public-form' } do |f| %>
+        <%= f.submit "Private", id: 'toggle-public-btn', class: "text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" %>
+
+    <% end %>
+    <% end %>
+
+    </div>
+  </div>
+
+
+
+  <div>
+    <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><%= link_to 'Generate Shopping List', user_recipe_shopping_lists_path(@user, @recipe) %></button>
+    <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><%= link_to "Add Ingredient", new_user_recipe_recipe_food_path(@recipe.user, @recipe) %></button>
+    <hr>
+  </div>
+
+<% if @recipe.public == false || current_user == @user %>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Food Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Quantiy
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <% @foods.includes(:food).each do |recipe_food| %>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   <%= recipe_food.food.name %>
+                </th>
+                <td class="px-6 py-4">
+                    <%= recipe_food.quantity %>
+                </td>
+                <td class="px-6 py-4">
+                    <%= recipe_food.food.price %>
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <%= button_to "Delete", user_recipe_recipe_food_path(@user, @recipe, recipe_food), :class => 'font-medium text-blue-600 dark:text-blue-500 hover:underline' , method: :delete %>
+                </td>
+            <% end %>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<% end %>
+</section>

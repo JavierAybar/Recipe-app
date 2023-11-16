@@ -1,0 +1,20 @@
+<section class='recipes-list'>
+ 
+  <h1 class= " mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">My Recipes</h1>
+  <div class = 'recipe-container-list'>
+  <a href='<%= new_user_recipe_path %>'>
+    <button class ='recipe-btn-add-recipe text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>Add Recipe</button>
+    </a>
+    <% @recipes.each do |recipe| %>
+      <a href="<%= user_recipe_path(@user, recipe) %>">
+        <div class = 'recipe-card '>
+          <div class = 'recipe-container-name-delete'>
+            <h4 class = 'recipe-name'><%= recipe.name %></h4>
+            <%= button_to "Remove", user_recipe_path(@user, recipe), method: :delete, class: 'remove-btn text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'%>
+          </div>  
+          <p class = 'recipe-description'><%= recipe.description %></p>
+        </div>  
+      </a>
+    <% end %>
+  </div>
+</section>
