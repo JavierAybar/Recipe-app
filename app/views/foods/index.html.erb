@@ -17,7 +17,7 @@
           <td class="px-6 py-4"><%= food.name %></td>
           <td class="px-6 py-4"><%= food.measurement_unit %></td>
           <td class="px-6 py-4"><%= food.price %></td>
-          <td class="px-6 py-4"><%= button_to "Delete", user_food_path(food.user, food), :class => 'btn' , method: :delete %></td>
+          <td class="px-6 py-4"><%= button_to "Delete", user_food_path(food.user, food), :class => 'font-medium text-blue-600 dark:text-blue-500 hover:underline' , method: :delete %></td>
         </tr>
       <% end %>
     </tbody>
