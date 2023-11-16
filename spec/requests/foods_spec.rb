@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'FoodsController', type: :request do
-
   describe 'GET /index' do
     before do
       user = User.create(name: 'Soban', email: 'test@tests.com', password: 123_456, password_confirmation: 123_456)
