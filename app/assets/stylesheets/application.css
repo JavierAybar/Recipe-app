@@ -99,7 +99,8 @@ a {
 .publicRecipes,
 .foods,
 .addFood,
-.addRecipe {
+.addRecipe,
+.addIngredient {
   display: flex;
   flex-direction: column;
   align-items: center;
