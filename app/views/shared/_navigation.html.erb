@@ -1,10 +1,26 @@
-<nav>
-  <%= link_to "Home", root_path %>
-  <% if user_signed_in? %>
-    <%= link_to "Recipes", user_recipes_path(current_user) %>
-    <%= link_to "Foods", user_foods_path(current_user) %>
-    <%= button_to "Logout", destroy_user_session_path, :class => 'btn', method: :delete  %>
-  <% else %>
-    <%= button_to "Sign In", new_user_session_path, :class => 'btn' %>
-  <% end %>
+<nav class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-10">
+    <ul class="flex flex-wrap -mb-px">
+      <li class="me-2">
+         <%= link_to "Home", root_path, :class => "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" %>
+        </li>
+ <% if user_signed_in? %>
+        <li class="me-2">
+        <%= link_to "Recipes", user_recipes_path(current_user), :class => "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" %>
+        </li>
+      
+        <li class="me-2">
+          <%= link_to "Foods",  user_foods_path(current_user), :class => "inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" %>
+        </li>
+
+         
+        <li class="me-2">
+            <%= button_to "Logout", destroy_user_session_path, :class => 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300', method: :delete  %>
+        </li>
+
+        <% else %>
+        <li class="me-2">
+        <%= button_to "Sign In", new_user_session_path, :class => 'inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' %>
+        </li>
+        <% end %>
+    </ul>
 </nav>
