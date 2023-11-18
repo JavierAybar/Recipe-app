@@ -6,12 +6,12 @@ ruby '3.2.2'
 gem 'devise'
 gem 'rails', '~> 7.1.2'
 gem 'rubocop', '>= 1.0', '< 2.0'
-gem 'pg', '~> 1.5', '>= 1.5.4'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.5', '>= 1.5.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
